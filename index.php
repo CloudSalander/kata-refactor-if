@@ -1,16 +1,11 @@
 <?php
 
-function calculateDiscount($type, $amount) {
-    if ($type == 'regular') {
-        $discount = $amount * 0.05;
-    } elseif ($type == 'premium') {
-        $discount = $amount * 0.10;
-    } elseif ($type == 'vip') {
-        $discount = $amount * 0.15;
-    } else {
-        $discount = 0;
-    }
+define('DISCOUNTS',['regular' => 0.05,'premium' => 0.1, 'vip' => 0.15]);
 
+function calculateDiscount($type, $amount) {
+    $discount = 0;
+    if (in_array($type,array_keys(DISCOUNTS))) $amount -= $amount * DISCOUNTS[$type];
+    else $discount = 0;
     return $amount - $discount;
 }
 
