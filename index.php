@@ -1,13 +1,10 @@
 <?php
 
-define('DISCOUNTS',['regular' => 0.05,'premium' => 0.1, 'vip' => 0.15]);
+require_once 'class/ICalculateDiscount.php';
+require_once 'class/DiscountType.php';
+require_once 'class/DiscountDispatcher.php';
 
-function calculateDiscount(string $type, float $amount): float {
-    $discount = 0;
-    if (in_array($type,array_keys(DISCOUNTS))) $amount -= $amount * DISCOUNTS[$type];
-    else $discount = 0;
-    return $amount - $discount;
-}
+define('DISCOUNTS',['regular' => 0.05,'premium' => 0.1, 'vip' => 0.15]);
 
 echo calculateDiscount('regular', 1000);
 echo "\n";
